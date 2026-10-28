@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Exceptions;
+
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
+
+class Handler extends ExceptionHandler
+{
+    /**
+     * A list of exception types with their corresponding custom log levels.
+     *
+     * @var array<class-string<\Throwable>, \Psr\Log\LogLevel::*>
+     */
+    protected $levels = [
+        //
+    ];
+
+    /**
+     * A list of the exception types that are not reported.
+     *
+     * @var array<int, class-string<\Throwable>>
+     */
+    protected $dontReport = [
+        //
+    ];
+
+    /**
+     * A list of the inputs that are never flashed to the session on validation exceptions.
+     *
+     * @var array<int, string>
+     */
+    protected $dontFlash = [
+        'current_password',
+        'password',
+        'password_confirmation',
+    ];
+
+    /**
+     * Register the exception handling callbacks for the application.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->reportable(function (Throwable $e) {
+            //
+        });
+
+        // Record denied access to protected routes (direct URL entry, tampered IDs, …).
+        $this->renderable(function (\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface $e, $request) {
+            if ($e->getStatusCode() === 403 && $request->user()) {
+                try {
+                    \App\Support\Audit::failure('access.denied', null, [
+                        'description' => \Illuminate\Support\Str::limit($request->method() . ' /' . ltrim($request->path(), '/') . ($e->getMessage() ? ' — ' . $e->getMessage() : ''), 490),
+                    ]);
+                } catch (Throwable $ignored) {
+                    // Never let audit failure mask the original response.
+                }
+            }
+
+            return null;
+        });
+    }
+}
