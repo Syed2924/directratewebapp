@@ -44,18 +44,21 @@ php artisan serve
 
 ### Demo accounts (local only)
 
-`DemoSeeder` runs only when `APP_ENV=local`. Every demo account uses the password **`Demo@12345`** and an `@dya.test` address, so no real mailbox is ever contacted.
+The demo seeders run only when `APP_ENV=local`. Every demo account uses the password **`Demo@12345`**. All accounts except the Super Admin use an `@dya.test` address, so no real mailbox is contacted. Change the Super Admin's password after the first sign-in.
 
-| Email | Role | Scope |
-|---|---|---|
-| ali.raza@dya.test | Super Admin | All |
-| sana.ullah@dya.test | Directorate Administrator | Peshawar, Charsadda |
-| asma.riaz@dya.test | Directorate Officer / Approver | All |
-| ahmed.khan@dya.test | Activity Officer | Peshawar |
-| ayesha.tariq@dya.test | Finance Staff | All |
-| faisal.rehman@dya.test | Hostel Staff | Swat Youth Hostel |
-| zara.khan@dya.test | Report Viewer | Swat |
-| imran.ali@dya.test | Jawan Markaz Staff (inactive) | Jawan Markaz Peshawar |
+| Name | Email | Role | Scope |
+|---|---|---|---|
+| Syed Awais | alsyedk123@gmail.com | Super Admin | All |
+| Sana Ullah | sana.ullah@dya.test | Directorate Administrator | Peshawar, Charsadda |
+| Asma Riaz | asma.riaz@dya.test | Directorate Officer / Approver | All |
+| Ahmed Khan | ahmed.khan@dya.test | Activity Officer | Peshawar |
+| Ayesha Tariq | ayesha.tariq@dya.test | Finance Staff | All |
+| Abdul Wahab | abdul.wahab@dya.test | Jawan Markaz Staff | Jawan Markaz Mardan |
+| Bilal Shah | bilal.shah@dya.test | Jawan Markaz Staff | Jawan Markaz Peshawar |
+| Usman Khan | usman.khan@dya.test | Hostel Staff | Peshawar & Mardan Youth Hostels |
+| Faisal Rehman | faisal.rehman@dya.test | Hostel Staff | Swat Youth Hostel |
+| Zara Khan | zara.khan@dya.test | Report Viewer | Swat |
+| Imran Ali | imran.ali@dya.test | Jawan Markaz Staff (inactive) | Jawan Markaz Peshawar |
 
 ### Tests
 
